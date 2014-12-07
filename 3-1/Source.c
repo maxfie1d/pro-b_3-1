@@ -36,6 +36,8 @@ int main(void){
 
 	RouteNavigate(p, n);
 
+	printf("hogeeeeeeee\n");
+
 
 
 	return 0;
