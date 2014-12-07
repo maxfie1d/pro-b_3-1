@@ -38,6 +38,8 @@ int main(void){
 
 	printf("hogeeeeeeee\n");
 
+	printf("Hey, survivors...\n");
+
 
 
 	return 0;
