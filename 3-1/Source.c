@@ -1,8 +1,28 @@
 #include <stdio.h>
 
+void RouteNavigate(int **array){
+
+
+}
+
 int main(void){
 
-	printf("Hello, World!!\n");
+	int travel_time[6][6] = { { 0, 7, 3, 0, 0, 0 }, 
+							  { 7, 0, 5, 7, 0, 0 }, 
+							  { 3, 5, 0, 6, 4, 0 }, 
+							  { 0, 7, 6, 0, 3, 9 }, 
+							  { 0, 0, 4, 3, 0, 8 }, 
+							  { 0, 0, 0, 9, 8, 0 } };
+
+	int n = 6;
+	int i;
+	int **p[6];
+
+	for (i = 0; i < n; i++){
+		p[i] = travel_time[i];
+	}
+
+	printf("%d\n",p[0][1]);
 
 	return 0;
 }
