@@ -3,7 +3,7 @@
 #include <windows.h>
 
 /*すでに通ったポイントか判定*/
-int AlreadyPassed(int route[], int count, int area){
+int AlreadyPassed(int *route, int count, int area){
 	int i;
 
 	for (i = 0; i < count; i++)
@@ -14,7 +14,7 @@ int AlreadyPassed(int route[], int count, int area){
 }
 
 /*全ルートを割り出す*/
-void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count) {
+void RouteNavigate(int **p_travel_time[], int *route, int n, int start, int count) {
 	int i;
 	int area;
 
@@ -43,7 +43,7 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 
 int main(void) {
 
-	int i, j;
+	int i;
 	int n = 6;
 
 	int travel_time[6][6] =
@@ -54,29 +54,26 @@ int main(void) {
 	{ 0, 0, 4, 3, 0, 8 },
 	{ 0, 0, 0, 9, 8, 0 } };
 
-	int passed[6][6];
+	/*関数呼び出し用ダブルポインタここから*/
+	int **p_travel_time[6];
+	for (i = 0; i < n; i++) {
+		p_travel_time[i] = (int **)&travel_time[i];
+	}
+	/*関数呼び出し用ダブルポインタここまで*/
 
-	for (i = 0; i < 6; i++)
-		for (j = 0; j < 6; j++)
-			passed[i][i] = 1;
-
-	int *route; //道筋を格納
+	/*ルート格納領域確保ここから*/
+	int *route;
 	route = (int *)malloc(sizeof(int) * n);
 	if (route == NULL) //メモリ確保エラー
 		exit(0);
-
 	for (i = 0; i < n; i++)
 		route[i] = -1;
-
 	route[0] = 0;
-
-	int **p_travel_time[6];
-
-	for (i = 0; i < n; i++) {
-		p_travel_time[i] = travel_time[i];
-	}
+	/*ルート格納領域確保ここまで*/
 
 	RouteNavigate(p_travel_time, route, n, 0, 0);
+
+	free(route);
 
 	return 0;
 }
