@@ -35,7 +35,7 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 
 	for (area = 0; area < n; area++) {
 		if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
-			printf("%d -> %d\n", start + 1, area + 1);
+			//printf("%d -> %d\n", start + 1, area + 1);
 			count++;
 			route[count] = area;
 			start = area;
