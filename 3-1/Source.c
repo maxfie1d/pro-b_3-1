@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 int AlreadyPassed(int route[], int count, int area){
 	int i;
@@ -16,33 +17,38 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 	int i;
 	char num;
 
+
+	int area;
+	int j;
+
 	if (start == n - 1){
 		for (i = 0; i <= count; i++)
-			printf("%d - ", route[i]);
+			printf("%d - ", route[i] + 1);
 		printf("\b\b\b  \b\b\n");
-		scanf("%d", &num);
+		Sleep(100);
+		//æ‚èÁ‚µ
+		start = route[count - 1];
+		route[count] = -1;
+		count--;
 		return 0;
 	}
-	else{
 
-		int area;
-		int j;
-
-		for (area = 0; area < n; area++) {
-			if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
-				count++;
-				route[count] = area;
-				start = area;
-				printf("-> %d\n", area + 1);
-				scanf("%d", &num);
-				RouteNavigate(p_travel_time, route, n, start, count);
-
-				//æ‚èÁ‚µ
-				route[count] = -1;
-			}
+	for (area = 0; area < n; area++) {
+		if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
+			printf("%d -> %d\n", start + 1, area + 1);
+			count++;
+			route[count] = area;
+			start = area;
+			RouteNavigate(p_travel_time, route, n, start, count);
+			//æ‚èÁ‚µ
+			start = route[count - 1];
+			route[count] = -1;
+			count--;
 		}
 
 	}
+
+
 
 	return 0;
 
