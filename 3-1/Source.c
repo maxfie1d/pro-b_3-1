@@ -1,19 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// 通過ポイントは0スタートとする
+
+int AlreadyPassed(int route[], int n, int area){
+	int i;
+
+	for (i = 0; i < n; i++)
+		if (route[i] == area)
+			return 1;
+
+	return 0;
+}
+
 void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count) {
 
-	int i, j;
+	int area;
+	int j;
 
-
-	for (i = 0; i < n; i++) {
-		if (p_travel_time[start][i] > 0 && route[count - 1] != -1)  {
-			count++;
-			route[count] = i;
-			for (j = 0; j < n; j++)
-			printf("%d-", i + 1);
-			start = i;
-			RouteNavigate(p_travel_time,route, n, start, count);
+	for (area = 0; area < n; area++) {
+		if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, n, area)){
+			route[count] = area;
+			start = area;
+			RouteNavigate(p_travel_time, route, n, start, count);
 		}
 	}
 
@@ -49,6 +58,8 @@ int main(void) {
 
 	for (i = 0; i < n; i++)
 		route[i] = -1;
+
+	route[0] = 0;
 
 	int **p_travel_time[6];
 
