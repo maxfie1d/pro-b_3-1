@@ -2,62 +2,46 @@
 #include <stdlib.h>
 #include <windows.h>
 
+/*すでに通ったポイントか判定*/
 int AlreadyPassed(int route[], int count, int area){
 	int i;
 
 	for (i = 0; i < count; i++)
-		if (route[i] == area)
+		if (area == route[i])
 			return 1;
 
 	return 0;
 }
 
+/*全ルートを割り出す*/
 void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count) {
-
 	int i;
-	char num;
-
-
 	int area;
-	int j;
 
 	if (start == n - 1){
 		for (i = 0; i <= count; i++)
 			printf("%d - ", route[i] + 1);
 		printf("\b\b\b  \b\b\n");
-		Sleep(100);
-		//取り消し
-		start = route[count - 1];
-		route[count] = -1;
-		count--;
-		return 0;
+		return;
 	}
 
 	for (area = 0; area < n; area++) {
 		if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
-			//printf("%d -> %d\n", start + 1, area + 1);
 			count++;
 			route[count] = area;
 			start = area;
 			RouteNavigate(p_travel_time, route, n, start, count);
-			//取り消し
+			//移動取り消し
 			start = route[count - 1];
-			route[count] = -1;
 			count--;
 		}
 
 	}
 
-
-
-	return 0;
-
-
-
+	return;
 }
 
 int main(void) {
-
 
 	int i, j;
 	int n = 6;
