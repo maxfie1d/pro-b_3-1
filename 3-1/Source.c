@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int AlreadyPassed(int route[], int n, int area){
+int AlreadyPassed(int route[], int count, int area){
 	int i;
 
-	for (i = 0; i < n; i++)
+	for (i = 0; i < count; i++)
 		if (route[i] == area)
 			return 1;
 
@@ -14,12 +14,13 @@ int AlreadyPassed(int route[], int n, int area){
 void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count) {
 
 	int i;
+	char num;
 
 	if (start == n - 1){
 		for (i = 0; i <= count; i++)
 			printf("%d - ", route[i]);
-		printf("\b\b\b  \b\b");
-
+		printf("\b\b\b  \b\b\n");
+		scanf("%d", &num);
 		return 0;
 	}
 	else{
@@ -28,16 +29,17 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 		int j;
 
 		for (area = 0; area < n; area++) {
-			if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, n, area)){
+			if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
 				count++;
 				route[count] = area;
 				start = area;
 				printf("-> %d\n", area + 1);
+				scanf("%d", &num);
 				RouteNavigate(p_travel_time, route, n, start, count);
-			}
 
-			//’¼‘O‚Ì“®‚«‚ğæ‚èÁ‚µ
-			route[count] = -1;
+				//æ‚èÁ‚µ
+				route[count] = -1;
+			}
 		}
 
 	}
