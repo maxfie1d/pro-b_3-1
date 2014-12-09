@@ -12,7 +12,7 @@ int AlreadyPassed(int *route, int count, int area){
 }
 
 /*全ルートを割り出す*/
-void RouteNavigate(int **p_travel_time[], int *route, int n, int start, int count) {
+void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count) {
 	int i;
 	int area; //行き先
 
