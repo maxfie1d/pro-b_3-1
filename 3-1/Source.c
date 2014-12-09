@@ -47,6 +47,7 @@ int main(void) {
 	int i;
 	int n = 6; //–Ú“I’n
 
+	//Še“¹‚ÌˆÚ“®ŽžŠÔ
 	int travel_time[6][6] = {
 		{ 0, 7, 3, 0, 0, 0 },
 		{ 7, 0, 5, 7, 0, 0 },
