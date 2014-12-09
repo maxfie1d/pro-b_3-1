@@ -57,12 +57,11 @@ int main(void) {
 		{ 0, 0, 1, 1, 0, 1, 0 }
 	};
 
-	/*関数呼び出し用ダブルポインタここから*/
-	int **p_travel_time[7];
-	for (i = 0; i < n; i++) {
-		p_travel_time[i] = (int **)&travel_time[i];
-	}
-	/*関数呼び出し用ダブルポインタここまで*/
+	/*配列を指すダブルポインタ*/
+	int **p_travel_time;
+	p_travel_time = (int **)malloc(sizeof(int *)*n);
+	for (i = 0; i < n; i++)
+		p_travel_time[i] = travel_time[i];
 
 	/*ルート格納領域確保ここから*/
 	int *route;
@@ -76,6 +75,8 @@ int main(void) {
 
 	RouteNavigate(p_travel_time, route, n, 0, 0);
 
+	/*メモリ解放*/
+	free(p_travel_time);
 	free(route);
 
 	return 0;
