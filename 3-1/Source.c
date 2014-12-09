@@ -60,6 +60,8 @@ int main(void) {
 	/*配列を指すダブルポインタ*/
 	int **p_travel_time;
 	p_travel_time = (int **)malloc(sizeof(int *)*n);
+	if (p_travel_time == NULL) //メモリ確保エラー
+		exit(0);
 	for (i = 0; i < n; i++)
 		p_travel_time[i] = travel_time[i];
 
