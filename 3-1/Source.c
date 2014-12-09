@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 
-/*すでに通ったポイントか判定*/
+/*すでに通った地点か判定*/
 int AlreadyPassed(int *route, int count, int area){
 	int i;
 	for (i = 0; i < count; i++)
