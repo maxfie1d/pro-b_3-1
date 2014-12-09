@@ -4,7 +4,6 @@
 /*すでに通ったポイントか判定*/
 int AlreadyPassed(int *route, int count, int area){
 	int i;
-
 	for (i = 0; i < count; i++)
 		if (area == route[i])
 			return 1;
@@ -25,18 +24,19 @@ void RouteNavigate(int **p_travel_time[], int *route, int n, int start, int coun
 
 		return;
 	}
+	else{
+		for (area = 0; area < n; area++) {
+			if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
+				count++;
+				route[count] = area;
+				start = area;
+				RouteNavigate(p_travel_time, route, n, start, count);
+				//移動取り消し
+				start = route[count - 1];
+				count--;
+			}
 
-	for (area = 0; area < n; area++) {
-		if (p_travel_time[start][area] > 0 && !AlreadyPassed(route, count, area)){
-			count++;
-			route[count] = area;
-			start = area;
-			RouteNavigate(p_travel_time, route, n, start, count);
-			//移動取り消し
-			start = route[count - 1];
-			count--;
 		}
-
 	}
 
 	return;
@@ -65,7 +65,7 @@ int main(void) {
 	for (i = 0; i < n; i++)
 		p_travel_time[i] = travel_time[i];
 
-	/*ルート格納領域確保ここから*/
+	/*ルート格納領域確保*/
 	int *route;
 	route = (int *)malloc(sizeof(int) * n);
 	if (route == NULL) //メモリ確保エラー
@@ -73,8 +73,8 @@ int main(void) {
 	for (i = 0; i < n; i++)
 		route[i] = -1;
 	route[0] = 0;
-	/*ルート格納領域確保ここまで*/
 
+	/*全ルート探索*/
 	RouteNavigate(p_travel_time, route, n, 0, 0);
 
 	/*メモリ解放*/
