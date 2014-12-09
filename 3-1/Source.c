@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 
 /*すでに通ったポイントか判定*/
 int AlreadyPassed(int *route, int count, int area){
@@ -16,12 +15,14 @@ int AlreadyPassed(int *route, int count, int area){
 /*全ルートを割り出す*/
 void RouteNavigate(int **p_travel_time[], int *route, int n, int start, int count) {
 	int i;
-	int area;
+	int area; //行き先
 
+	/*目標地点に到達した時*/
 	if (start == n - 1){
 		for (i = 0; i <= count; i++)
 			printf("%d - ", route[i] + 1);
 		printf("\b\b\b  \b\b\n");
+
 		return;
 	}
 
