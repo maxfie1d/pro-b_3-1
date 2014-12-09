@@ -45,18 +45,20 @@ void RouteNavigate(int **p_travel_time[], int *route, int n, int start, int coun
 int main(void) {
 
 	int i;
-	int n = 6;
+	int n = 7;
 
-	int travel_time[6][6] =
-	{ { 0, 7, 3, 0, 0, 0 },
-	{ 7, 0, 5, 7, 0, 0 },
-	{ 3, 5, 0, 6, 4, 0 },
-	{ 0, 7, 6, 0, 3, 9 },
-	{ 0, 0, 4, 3, 0, 8 },
-	{ 0, 0, 0, 9, 8, 0 } };
+	int travel_time[7][7] = {
+		{ 0, 1, 0, 1, 1, 0, 0 },
+		{ 1, 0, 1, 1, 0, 0, 0 },
+		{ 0, 1, 0, 1, 0, 0, 1 },
+		{ 1, 1, 1, 0, 1, 1, 1 },
+		{ 1, 0, 0, 1, 0, 1, 0 },
+		{ 0, 0, 0, 1, 1, 0, 1 },
+		{ 0, 0, 1, 1, 0, 1, 0 }
+	};
 
 	/*関数呼び出し用ダブルポインタここから*/
-	int **p_travel_time[6];
+	int **p_travel_time[7];
 	for (i = 0; i < n; i++) {
 		p_travel_time[i] = (int **)&travel_time[i];
 	}
