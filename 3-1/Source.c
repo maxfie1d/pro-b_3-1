@@ -1,7 +1,7 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 
-/*‚·‚Å‚É’Ê‚Á‚½ƒ|ƒCƒ“ƒg‚©”»’è*/
+/*ã™ã§ã«é€šã£ãŸãƒã‚¤ãƒ³ãƒˆã‹åˆ¤å®š*/
 int AlreadyPassed(int *route, int count, int area){
 	int i;
 	for (i = 0; i < count; i++)
@@ -11,12 +11,12 @@ int AlreadyPassed(int *route, int count, int area){
 	return 0;
 }
 
-/*‘Sƒ‹[ƒg‚ğŠ„‚èo‚·*/
+/*å…¨ãƒ«ãƒ¼ãƒˆã‚’å‰²ã‚Šå‡ºã™*/
 void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count) {
 	int i;
-	int area; //s‚«æ
+	int area; //è¡Œãå…ˆ
 
-	/*–Ú•W’n“_‚É“’B‚µ‚½*/
+	/*ç›®æ¨™åœ°ç‚¹ã«åˆ°é”ã—ãŸæ™‚*/
 	if (start == n - 1){
 		for (i = 0; i <= count; i++)
 			printf("%d - ", route[i] + 1);
@@ -31,7 +31,7 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 				route[count] = area;
 				start = area;
 				RouteNavigate(p_travel_time, route, n, start, count);
-				//ˆÚ“®æ‚èÁ‚µ
+				//ç§»å‹•å–ã‚Šæ¶ˆã—
 				start = route[count - 1];
 				count--;
 			}
@@ -45,9 +45,9 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 int main(void) {
 
 	int i;
-	int n = 6; //–Ú“I’n
+	int n = 6; //ç›®çš„åœ°
 
-	//Še“¹‚ÌˆÚ“®ŠÔ
+	//å„é“ã®ç§»å‹•æ™‚é–“
 	int travel_time[6][6] = {
 		{ 0, 7, 3, 0, 0, 0 },
 		{ 7, 0, 5, 7, 0, 0 },
@@ -57,27 +57,27 @@ int main(void) {
 		{ 0, 0, 0, 9, 8, 0 }
 	};
 
-	/*”z—ñ‚ğw‚·ƒ_ƒuƒ‹ƒ|ƒCƒ“ƒ^*/
+	/*é…åˆ—ã‚’æŒ‡ã™ãƒ€ãƒ–ãƒ«ãƒã‚¤ãƒ³ã‚¿*/
 	int **p_travel_time;
 	p_travel_time = (int **)malloc(sizeof(int *)*n);
-	if (p_travel_time == NULL) //ƒƒ‚ƒŠŠm•ÛƒGƒ‰[
+	if (p_travel_time == NULL) //ãƒ¡ãƒ¢ãƒªç¢ºä¿ã‚¨ãƒ©ãƒ¼
 		exit(0);
 	for (i = 0; i < n; i++)
 		p_travel_time[i] = travel_time[i];
 
-	/*ƒ‹[ƒgŠi”[—ÌˆæŠm•Û*/
+	/*ãƒ«ãƒ¼ãƒˆæ ¼ç´é ˜åŸŸç¢ºä¿*/
 	int *route;
 	route = (int *)malloc(sizeof(int) * n);
-	if (route == NULL) //ƒƒ‚ƒŠŠm•ÛƒGƒ‰[
+	if (route == NULL) //ãƒ¡ãƒ¢ãƒªç¢ºä¿ã‚¨ãƒ©ãƒ¼
 		exit(0);
 	for (i = 0; i < n; i++)
 		route[i] = -1;
 	route[0] = 0;
 
-	/*‘Sƒ‹[ƒg’Tõ*/
+	/*å…¨ãƒ«ãƒ¼ãƒˆæ¢ç´¢*/
 	RouteNavigate(p_travel_time, route, n, 0, 0);
 
-	/*ƒƒ‚ƒŠ‰ğ•ú*/
+	/*ãƒ¡ãƒ¢ãƒªè§£æ”¾*/
 	free(p_travel_time);
 	free(route);
 
