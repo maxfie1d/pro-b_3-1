@@ -37,9 +37,8 @@ void RouteNavigate(int **p_travel_time, int *route, int n, int start, int count)
 			}
 
 		}
-	}
-
 	return;
+	}
 }
 
 int main(void) {
