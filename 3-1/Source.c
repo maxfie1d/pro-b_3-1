@@ -69,8 +69,8 @@ int main(void) {
 	if (route == NULL) //メモリ確保エラー
 		exit(0);
 	for (i = 0; i < n; i++)
-		route[i] = -1;
-	route[0] = 0;
+		route[i] = -1; //-1で初期化
+	route[0] = 0; //スタート地点を0とする
 
 	/*全ルート探索*/
 	RouteNavigate(p_travel_time, route, n, 0, 0);
